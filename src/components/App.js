@@ -1,12 +1,14 @@
 import React from 'react';
 import DrugaKomponenta from './DrugaKomponenta';
 import Okvir from './Okvir';
+import PocetnaStrana from './PocetnaStrana';
 import PrvaKomponenta from './PrvaKomponenta';
 
 function App() {
   let x = 15;
   return (
     <div className="App">
+      <PocetnaStrana />
       Zdravo
       <PrvaKomponenta />
       <PrvaKomponenta />

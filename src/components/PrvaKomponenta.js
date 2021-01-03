@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Btn from './Btn';
 
 
 const PrvaKomponenta = (props) => {
@@ -15,7 +16,10 @@ const PrvaKomponenta = (props) => {
 
   return (
 
-    <div onClick={handleClick}>Ovo je moja prva komponenta. Kliknuto je {brojac} ,puta.</div>
+    <div>Ovo je moja prva komponenta. Kliknuto je {brojac} ,puta. <Btn
+      title="Klikni me"
+      handleClick={handleClick}
+    /></div>
 
   );
 }

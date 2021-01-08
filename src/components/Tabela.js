@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { sortirajPoGodinama } from '../utils/sort-utils';
 
 const Tabela = (props) => {
   let poStrani = 0;
@@ -18,18 +19,7 @@ const Tabela = (props) => {
     return false;
   });
 
-  let sortedData = dataZaPrikaz.sort(function(a, b) {
-    var _a = a.godine; // ignore upper and lowercase
-    var _b = b.godine; // ignore upper and lowercase
-    if (_a < _b) {
-      return -1;
-    }
-    if (_a > _b) {
-      return 1;
-    }
-    // names must be equal
-    return 0;
-  });
+  let sortedData = sortirajPoGodinama(dataZaPrikaz);
 
   let jsxTableRows = sortedData.map(el => {
     return (

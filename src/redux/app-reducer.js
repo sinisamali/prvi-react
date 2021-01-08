@@ -30,6 +30,18 @@
       name: 'Miodrag',
       prezime: 'Markovic',
       godine: 60
+    },
+    {
+      id: 6,
+      name: 'Lazar',
+      prezime: 'Markovic',
+      godine: 40
+    },
+    {
+      id: 7,
+      name: 'Fiona',
+      prezime: 'Markovic',
+      godine:50
     }
   ];
 

@@ -2,10 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Tabela = (props) => {
-
+  let poStrani = 0;
+  if(props.poStrani > 0){
+    poStrani = props.poStrani; // stitmo komponentu ako joj slucajno ne stigne props.poStrani ili ako stigne nesto sto nije broj
+  }
+  
   let data = props.tableData;
 
-  let jsxTableRows = data.map(el => {
+  let counter = 0;
+  let dataZaPrikaz = data.filter((item)=>{
+    counter++;
+    if(counter <= poStrani){
+       return true;
+    }
+    return false;
+  });
+
+  let jsxTableRows = dataZaPrikaz.map(el => {
     return (
       <tr key={el.id}>
         <td>{el.id}</td>

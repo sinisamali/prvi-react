@@ -37,7 +37,7 @@ const PocetnaStrana = (props) => {
         </label>
 
       </div>
-      <Tabela />
+      <Tabela poStrani={poStrani} />
     </div>
   );
 }

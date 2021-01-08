@@ -1,39 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Tabela = (props) => {
 
-  let data = [
-    {
-      id: 1,
-      name: 'Zoran',
-      prezime: 'Markovic',
-      godine: 25
-    },
-    {
-      id: 2,
-      name: 'Marko',
-      prezime: 'Markovic',
-      godine: 24
-    },
-    {
-      id: 3,
-      name: 'Jovan',
-      prezime: 'Markovic',
-      godine: 23
-    },
-    {
-      id: 4,
-      name: 'Srdjan',
-      prezime: 'Markovic',
-      godine: 22
-    },
-    {
-      id: 5,
-      name: 'Miodrag',
-      prezime: 'Markovic',
-      godine: 60
-    }
-  ];
+  let data = props.tableData;
 
   let jsxTableRows = data.map(el => {
     return (
@@ -63,4 +33,18 @@ const Tabela = (props) => {
   );
 }
 
-export default Tabela;
+// export default Tabela;
+
+// POVEZIVANJE SA REDUX STATEOM APLIKACIJE I REDUX DISPATCHEROM
+// KORAK 1:
+const mapStateToProps = state => ({ 
+  readme: 'Sve propertije iz ovog objekta komponenta iznad prima kao props + i props.dispatch',
+  tableData: state.adresar,
+  blabla: 'bla bla bla'
+});
+// to znaci da ce iz globalnog REDUX statea aplikacije da bude uzeto samo .adresar i stici ce ovoj komponenti kao props.tableData
+// takodje props.blabla smo sada izmislili, nije iz redix statea
+// dodatno cemo da ovom tehnikom primimo i props.dispatch
+// props.dispatch() sluzi za povratnu komunikaciju sa reducom.
+// KORAK 2:
+export default connect(mapStateToProps)(Tabela); // ovom se formira specijalan komponenta iznad nase, koja sluzi da nasoj komponenti posalje props koje smo definisali u mapStateToProps

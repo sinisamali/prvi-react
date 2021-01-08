@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { sortirajPoGodinama, sortirajPoKljucu } from '../utils/sort-utils';
 
 const Tabela = (props) => {
-  const [key, setKey] = useState(null)
+  const [key, setKey] = useState(null);
+  const [order, setOrder] = useState(true); // redosled je na engleski Order - order true znaci po abecedi a order false obrnuto
 
   let poStrani = 0;
   if (props.poStrani > 0) {
@@ -22,7 +23,7 @@ const Tabela = (props) => {
   });
 
   // let sortedData = sortirajPoGodinama(dataZaPrikaz);
-  let sortedData = sortirajPoKljucu(dataZaPrikaz, key);
+  let sortedData = sortirajPoKljucu(dataZaPrikaz, key, order);
 
   let jsxTableRows = sortedData.map(el => {
     return (
@@ -39,6 +40,12 @@ const Tabela = (props) => {
   const _click = (sta) => {
     // prima na sta smo kliknuli i izvodi sortirnje po tom parametru
     setKey(sta);
+    // takodje na svaki klik menjamo redosled
+    if(order){
+      setOrder(false)
+    } else{
+      setOrder(true)
+    }
   }
 
   return (

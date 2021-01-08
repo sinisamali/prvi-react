@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { sortirajPoGodinama } from '../utils/sort-utils';
+import { sortirajPoGodinama, sortirajPoKljucu } from '../utils/sort-utils';
 
 const Tabela = (props) => {
+  const [key, setKey] = useState(null)
+
   let poStrani = 0;
-  if(props.poStrani > 0){
+  if (props.poStrani > 0) {
     poStrani = props.poStrani; // stitmo komponentu ako joj slucajno ne stigne props.poStrani ili ako stigne nesto sto nije broj
   }
-  
+
   let data = props.tableData;
 
   let counter = 0;
-  let dataZaPrikaz = data.filter((item)=>{
+  let dataZaPrikaz = data.filter((item) => {
     counter++;
-    if(counter <= poStrani){
-       return true;
+    if (counter <= poStrani) {
+      return true;
     }
     return false;
   });
 
-  let sortedData = sortirajPoGodinama(dataZaPrikaz);
+  // let sortedData = sortirajPoGodinama(dataZaPrikaz);
+  let sortedData = sortirajPoKljucu(dataZaPrikaz, key);
 
   let jsxTableRows = sortedData.map(el => {
     return (
@@ -30,16 +33,22 @@ const Tabela = (props) => {
         <td>{el.godine}</td>
       </tr>
     )
-  })
+  });
+
+
+  const _click = (sta) => {
+    // prima na sta smo kliknuli i izvodi sortirnje po tom parametru
+    setKey(sta);
+  }
 
   return (
     <table className="table table-dark table-striped">
       <thead>
         <tr>
-          <th >#</th>
-          <th >Ime</th>
+          <th onClick={() => { _click('id') }}>#</th>
+          <th onClick={() => { _click('name') }}>Ime</th>
           <th >Prezime</th>
-          <th >Godine</th>
+          <th onClick={() => { _click('godine') }}>Godine</th>
         </tr>
       </thead>
       <tbody>
@@ -53,7 +62,7 @@ const Tabela = (props) => {
 
 // POVEZIVANJE SA REDUX STATEOM APLIKACIJE I REDUX DISPATCHEROM
 // KORAK 1:
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
   readme: 'Sve propertije iz ovog objekta komponenta iznad prima kao props + i props.dispatch',
   tableData: state.adresar,
   blabla: 'bla bla bla'

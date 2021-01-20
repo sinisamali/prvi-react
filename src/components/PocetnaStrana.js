@@ -7,6 +7,7 @@ const PocetnaStrana = (props) => {
   // const [poStrani, setPoStrani] = useState("5");
   // const [strana, setStrana] = useState(1);
   let strana = props.strana;
+  let ukupnoStrana = props.ukupnoStrana;
   let poStrani = props.poStrane
 
   const handleChange = e => {
@@ -42,14 +43,15 @@ const PocetnaStrana = (props) => {
   return (
     <div className="pocetna-strana" >
       <div className="toolBar">
-        <Btn
-          title="next"
-          handleClick={nextPage}
-        />
-        <span>Strana: {strana}</span>
+
         <Btn
           title="previous"
           handleClick={prevPage}
+        />
+        <span>Strana: {strana}/{ukupnoStrana}</span>
+        <Btn
+          title="next"
+          handleClick={nextPage}
         />
 
         <label>Po strani:
@@ -76,7 +78,8 @@ const PocetnaStrana = (props) => {
 const mapStateToProps = state => ({
   readme: 'Sve propertije iz ovog objekta komponenta iznad prima kao props + i props.dispatch',
   strana: state.strana,
-  poStrane: state.poStrani
+  poStrane: state.poStrani,
+  ukupnoStrana: state.ukupnoStrana
 });
 
 export default connect(mapStateToProps)(PocetnaStrana); // ovom se formira specijalan komponenta iznad nase, koja sluzi da nasoj komponenti posalje props koje smo definisali u mapStateToProps

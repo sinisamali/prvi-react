@@ -1,3 +1,4 @@
+import { izracunajUkupnoStrana, paginationNextPage, paginationPrevPage } from "../utils/pagination-utils";
 
 
 const adresarData = [
@@ -51,7 +52,8 @@ const initialState = {
   nesto: 'blabla',
   adresar: adresarData,
   strana: 1,
-  poStrani: 5
+  poStrani: 5,
+  ukupnoStrana: izracunajUkupnoStrana(adresarData, 5)
 }
 
 // Use the initialState as a default value
@@ -63,13 +65,13 @@ export default function appReducer(state = initialState, action) {
     case 'NEXT_PAGE':
       return {
         ...state,
-        strana: state.strana + 1
+        strana: paginationNextPage(state.adresar, state.strana, state.poStrani)
       };
 
     case 'PREV_PAGE':
       return {
         ...state,
-        strana: state.strana - 1
+        strana: paginationPrevPage(state.adresar, state.strana, state.poStrani)
       };
 
     default:

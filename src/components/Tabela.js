@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { makeArrayForSinglePage } from '../utils/pagination-utils';
 import { sortirajPoGodinama, sortirajPoKljucu } from '../utils/sort-utils';
 
 const Tabela = (props) => {
   const [key, setKey] = useState(null);
   const [order, setOrder] = useState(true); // redosled je na engleski Order - order true znaci po abecedi a order false obrnuto
 
+  let strana = props.strana;
   let poStrani = 0;
   if (props.poStrani > 0) {
     poStrani = props.poStrani; // stitmo komponentu ako joj slucajno ne stigne props.poStrani ili ako stigne nesto sto nije broj
@@ -13,6 +15,7 @@ const Tabela = (props) => {
 
   let data = props.tableData;
 
+  /*
   let counter = 0;
   let dataZaPrikaz = data.filter((item) => {
     counter++;
@@ -21,6 +24,9 @@ const Tabela = (props) => {
     }
     return false;
   });
+  */
+
+  let dataZaPrikaz = makeArrayForSinglePage(data, strana, poStrani);
 
   // let sortedData = sortirajPoGodinama(dataZaPrikaz);
   let sortedData = sortirajPoKljucu(dataZaPrikaz, key, order);

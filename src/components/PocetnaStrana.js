@@ -8,7 +8,7 @@ const PocetnaStrana = (props) => {
   // const [strana, setStrana] = useState(1);
   let strana = props.strana;
   let ukupnoStrana = props.ukupnoStrana;
-  let poStrani = props.poStrane
+  let poStrani = props.poStrani;
 
   const handleChange = e => {
     // ova funkcija se poziva svaki put kada korisnik promeni nesto u odredjenom polju forme (onChange event)
@@ -16,6 +16,10 @@ const PocetnaStrana = (props) => {
     let value = e.target.value; // value koji je korisnik izabrao
     console.log(typeof value);
     // setPoStrani(value);
+    props.dispatch({
+      type: 'PER_PAGE_CHANGED',
+      payload: Number.parseInt(value)
+    })
 
   };
 
@@ -78,7 +82,7 @@ const PocetnaStrana = (props) => {
 const mapStateToProps = state => ({
   readme: 'Sve propertije iz ovog objekta komponenta iznad prima kao props + i props.dispatch',
   strana: state.strana,
-  poStrane: state.poStrani,
+  poStrani: state.poStrani,
   ukupnoStrana: state.ukupnoStrana
 });
 

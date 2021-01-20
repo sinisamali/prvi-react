@@ -74,6 +74,14 @@ export default function appReducer(state = initialState, action) {
         strana: paginationPrevPage(state.adresar, state.strana, state.poStrani)
       };
 
+    case 'PER_PAGE_CHANGED':
+      return {
+        ...state,
+        poStrani: action.payload,
+        strana: 1,
+        ukupnoStrana: izracunajUkupnoStrana(state.adresar, action.payload)
+      };
+
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this specific action, return the existing state unchanged
